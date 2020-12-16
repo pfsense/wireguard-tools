@@ -265,7 +265,7 @@ static bool is_match(const char *name)
 	if (!isdigit(name[2]))
 		return false;
 	errno = 0;
-	return 0;
+	return true;
 }
 
 static int get_dgram_socket(void)
