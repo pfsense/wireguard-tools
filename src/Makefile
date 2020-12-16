@@ -46,17 +46,17 @@ CFLAGS += -Wall -Wextra
 CFLAGS += -MMD -MP
 CFLAGS += -DRUNSTATEDIR="\"$(RUNSTATEDIR)\""
 ifeq ($(DEBUG),yes)
-CFLAGS += -g -O0
+CFLAGS += -g
 endif
 WIREGUARD_TOOLS_VERSION = $(patsubst v%,%,$(shell GIT_CEILING_DIRECTORIES="$(PWD)/../.." git describe --dirty 2>/dev/null))
 ifneq ($(WIREGUARD_TOOLS_VERSION),)
 CFLAGS += -D'WIREGUARD_TOOLS_VERSION="$(WIREGUARD_TOOLS_VERSION)"'
 endif
-ifeq ($(PLATFORM),haiku)
-LDLIBS += -lnetwork -lbsd
-endif
 ifeq ($(PLATFORM),freebsd)
 LDLIBS += -lnv
+endif
+ifeq ($(PLATFORM),haiku)
+LDLIBS += -lnetwork -lbsd
 endif
 ifeq ($(PLATFORM),windows)
 CC := x86_64-w64-mingw32-gcc
